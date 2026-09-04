@@ -3,7 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "node:path";
-import { defineConfig, type Plugin, type ViteDevServer } from "vite";
+import { defineConfig, type Plugin, type ViteDevServer, type UserConfig, type ConfigEnv } from "vite";
 import { vitePluginManusRuntime } from "vite-plugin-manus-runtime";
 
 // =============================================================================
@@ -156,7 +156,7 @@ function conditionalAnalyticsPlugin(): Plugin {
   let env: Record<string, string>;
   return {
     name: "conditional-analytics",
-    config(config, { mode }) {
+    config(config: UserConfig, { mode }: ConfigEnv) {
       env = loadEnv(mode, process.cwd(), "");
     },
     transformIndexHtml: {
